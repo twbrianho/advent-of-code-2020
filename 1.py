@@ -6,12 +6,11 @@ class Day1:
                 self.inputs.append(int(line.strip()))
 
     def part1(self):
-        seen = set()
+        seen_nums = set()
         for num in self.inputs:
-            if (2020 - num) in seen:
+            if (2020 - num) in seen_nums:
                 return (2020 - num) * num
-            seen.add(num)
-        print("No two numbers sum to 2020.")
+            seen_nums.add(num)
 
     def part2(self):
         seen_nums = set()

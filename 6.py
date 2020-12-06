@@ -2,16 +2,8 @@ class Day6:
     def __init__(self):
         self.inputs = []
         with open("inputs/6.txt") as f:
-            curr_group = []
-            for line in f:
-                row = str(line.strip())
-                if not row:
-                    self.inputs.append(curr_group)
-                    curr_group = []
-                    continue
-                curr_group.append(list(row))
-            # Add final group
-            self.inputs.append(curr_group)
+            groups_raw = f.read().split("\n\n")
+            self.inputs = [group_raw.split("\n") for group_raw in groups_raw]
 
     def part1(self):
         count = 0

@@ -1,3 +1,6 @@
+import re
+
+
 def is_valid_byr(byr: str):
     return 1920 <= int(byr) <= 2002
 
@@ -58,18 +61,9 @@ class Day4:
     def __init__(self):
         self.inputs = []
         with open("inputs/4.txt") as f:
-            curr_passport = {}
-            for line in f:
-                row = str(line.strip())
-                if not row:
-                    self.inputs.append(curr_passport)
-                    curr_passport = {}
-                    continue
-                for field in row.split(" "):
-                    k, v = field.split(":")
-                    curr_passport[k] = v
-            # Add final passport as well
-            self.inputs.append(curr_passport)
+            passports_raw = f.read().split("\n\n")
+            passports = [re.split(r"[\n ]", passport_raw) for passport_raw in passports_raw]
+            self.inputs = [dict(map(lambda x: x.split(":"), passport)) for passport in passports]
 
     def part1(self):
         count = 0
